@@ -5,11 +5,18 @@ class Solution {
         int[] second = new int[n * n];
         
         int index = 0;
+        HashMap<Integer, Integer> hmap = new HashMap<Integer, Integer>();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 first[index] = A[i] + B[j];
-                second[index] = C[i] + D[j];
+                int key = C[i] + D[j];
+                second[index] = key;
                 index++;
+                if (!hmap.containsKey(key)) {
+                    hmap.put(key, 1);
+                } else {
+                    hmap.put(key, hmap.get(key) + 1);
+                }
             }
         }
          
@@ -17,11 +24,13 @@ class Solution {
         
         int count = 0;
         for (int j = 0; j < n * n; j++) {
-            if (Arrays.binarySearch(second, -first[j]) >= 0) {
-                count++;
+            int pos = Arrays.binarySearch(second, -first[j]);
+            if (pos >= 0) {
+                count = count + hmap.get(-first[j]);
             }
         }
         
         return count;
     }
+    
 }
