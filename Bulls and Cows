@@ -21,6 +21,6 @@ class Solution {
         
         cows = cows - bulls;
         
-        return bulls + 'A' + cows + 'B';
+        return Integer.toString(bulls) + 'A' + Integer.toString(cows) + 'B';
     }
 }
